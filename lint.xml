@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+  <!-- Docs on writing lint checks: https://developer.android.com/studio/write/lint -->
+  <issue id="any">
+    <ignore path="build/generated" />
+  </issue>
+
+  <!-- Severity levels include: "fatal", "error", "warning", "informational", "disable" or "ignore", "enable"
+  Docs: https://developer.android.com/studio/write/lint#config -->
+
+  <!-- Ignore -->
+  <issue id="Overdraw" severity="ignore" />
+  <issue id="GoogleAppIndexingWarning" severity="ignore" />
+  <issue id="Typos" severity="ignore" />
+  <issue id="InvalidPackage" severity="ignore" />
+  <!-- https://github.com/mParticle/mparticle-android-sdk/issues/45-->
+  <issue id="MParticleInitialization" severity="ignore" />
+
+  <!-- https://cfacorp.atlassian.net/browse/AND-1545 -->
+  <issue id="OldTargetApi" severity="ignore" />
+
+  <!-- does not catch uses of view IDs by Kotlin android extensions -->
+  <issue id="UnusedIds" severity="ignore" />
+
+  <!-- We have many out-of-date dependencies; this isn't helpful right now -->
+  <issue id="GradleDependency" severity="ignore" />
+
+  <issue id="VectorRaster" severity="ignore" />
+  <issue id="VectorPath" severity="ignore" />
+  <issue id="InvalidPackage" severity="ignore"/>
+  <issue id="GifUsage" severity="ignore"/>
+
+  <!-- Currently ignoring because these issues will be resolved as we move further into Compose -->
+  <issue id="NotifyDataSetChanged" severity="ignore"/>
+
+  <!-- Ideally we'll enable this one day; right now it doesn't make sense for our current M2/M3 usage -->
+  <issue id="UsingMaterialAndMaterial3Libraries" severity="ignore"/>
+
+  <!-- Android's built-in lint checks include a check related to naming Composables, but Slack's -->
+  <!-- lint checks include a similar check. It doesn't make sense to enable both; we prefer Slack's offering -->
+  <issue id="ComposableNaming" severity="ignore" />
+
+  <!-- This lint error fails the build when we have newer AGP versions, which Dependabot would catch anyway. -->
+  <issue id="AndroidGradlePluginVersion" severity="informational"/>
+
+  <issue id="ComposeCompositionLocalUsage">
+    <option name="allowed-composition-locals" value="LocalLoadingDotAnimationConfig,LocalLoadingIconAnimationConfig,LocalLoadingAnimationConfig,LocalLoadingAnimationSpeedScalar,LocalFullScreenLoadingCoordinator" />
+  </issue>
+
+  <issue id="ComposeNamingUppercase,ComposeNamingLowercase">
+    <option name="allowed-composable-function-names" value=".*observe" />
+  </issue>
+
+  <issue id="SetTextI18n">
+    <ignore path="app/src/tools" />
+  </issue>
+
+  <!--  We should care about this and re-enable it, but   -->
+  <!--  we can't because of a bug that surfaced after we  -->
+  <!--  added the staging manifest to the project.        -->
+  <!--  https://issuetracker.google.com/issues/199180661  -->
+  <issue id="ForegroundServiceType" severity="ignore" />
+</lint>

@@ -1,0 +1,60 @@
+plugins {
+  id 'com.android.library'
+  id 'kotlin-android'
+}
+
+android {
+  compileSdk libs.versions.compileSdk.get().toInteger()
+
+  defaultConfig {
+    minSdk libs.versions.minSdk.get().toInteger()
+    targetSdk libs.versions.targetSdk.get().toInteger()
+
+    testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    testInstrumentationRunnerArguments clearPackageData: 'true'
+
+    // Stops the Gradle plugin’s automatic rasterization of vectors & uses SVGs only
+    generatedDensities = []
+    vectorDrawables.useSupportLibrary = true
+
+    multiDexEnabled true
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+    }
+  }
+
+  sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+    test.java.srcDirs += 'src/test/kotlin'
+    androidTest.java.srcDirs += 'src/androidTest/kotlin'
+  }
+
+  compileOptions {
+    // allows AGP to "backport" a subset of Java APIs only available on higher SDK levels.
+    // See: https://developer.android.com/studio/write/java8-support#library-desugaring
+    coreLibraryDesugaringEnabled = true
+  }
+
+  packagingOptions {
+    resources.excludes.add("META-INF/LICENSE.md")
+    resources.excludes.add("META-INF/LICENSE-notice.md")
+  }
+  buildFeatures {
+    dataBinding = false
+    viewBinding = true
+  }
+}
+
+dependencies {
+  coreLibraryDesugaring libs.androidDesugarJdkLibs
+
+  // Used for createAndroidComposeRule in tests
+  debugImplementation(platform(libs.androidxComposeBom))
+  debugImplementation libs.androidxComposeUiTestManifest
+
+  testImplementation libs.assertk
+  androidTestImplementation libs.assertk
+}
