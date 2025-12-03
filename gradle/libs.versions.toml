@@ -7,6 +7,7 @@ minSdk = "28"
 targetSdk = "35"
 
 agp = "8.13.1"
+androidTools = "31.13.1"
 androidDesugarJdkLibs = "2.1.5"
 androidxActivity = "1.12.0"
 androidxAppcompat = "1.7.1"
@@ -45,6 +46,11 @@ kotlinxCoroutinesAndroid = { group = "org.jetbrains.kotlinx", name = "kotlinx-co
 #noinspection UnusedVersionCatalogEntry
 slackComposeLintChecks = { group = "com.slack.lint.compose", name = "compose-lint-checks", version.ref = "slackComposeLintChecks" }
 
+# Dependencies of the included build-logic
+androidGradleApiPlugin = { group = "com.android.tools.build", name = "gradle-api", version.ref = "agp" }
+androidToolsCommon = { group = "com.android.tools", name = "common", version.ref = "androidTools" }
+composeGradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
+
 [plugins]
 agpApp = { id = "com.android.application", version.ref = "agp" }
 agpLibrary = { id = "com.android.library", version.ref = "agp" }
@@ -52,3 +58,7 @@ compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 spotless = { id = "com.diffplug.spotless", version = "8.1.0" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
+# internal convention plugins defined in build-logic:
+cfaAndroidLibrary = { id = "cfa.android.library" }
+cfaAndroidLibraryCompose = { id = "cfa.android.library.compose" }

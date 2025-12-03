@@ -1,5 +1,5 @@
 plugins {
-  id("cfa.compose-library")
+  alias(libs.plugins.cfaAndroidLibraryCompose)
   id("kotlin-parcelize")
 }
 

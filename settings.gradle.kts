@@ -1,8 +1,16 @@
 pluginManagement {
+  includeBuild("build-logic")
+
   repositories {
     gradlePluginPortal()
     mavenCentral()
-    google()
+    google {
+      content {
+        includeGroupByRegex("com\\.android.*")
+        includeGroupByRegex("com\\.google.*")
+        includeGroupByRegex("androidx.*")
+      }
+    }
   }
 }
 
@@ -38,9 +46,6 @@ dependencyResolutionManagement {
       content { includeGroupByRegex("com\\.cfadevelop\\.buf\\.gen") }
     }
   }
-
-  // MoEngage SDK
-//  versionCatalogs { create("moengage") { from("com.moengage:android-dependency-catalog:6.1.1") } }
 }
 
 plugins {
